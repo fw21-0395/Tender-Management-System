@@ -1,30 +1,30 @@
 package com.masai.Models;
 
-public class User {
+public class Admin {
 
-	private int Id;
+	private int AdminID;
 	private String UserName;
 	private String Password;
 	private String Role;
 	
-	public User() {
+	public Admin() {
 		
 	}
 
-	public User(int id, String userName, String password, String role) {
+	public Admin(int adminID, String userName, String password, String role) {
 		super();
-		Id = id;
+		AdminID = adminID;
 		UserName = userName;
 		Password = password;
 		Role = role;
 	}
 
-	public int getId() {
-		return Id;
+	public int getAdminID() {
+		return AdminID;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setAdminID(int adminID) {
+		AdminID = adminID;
 	}
 
 	public String getUserName() {
@@ -53,7 +53,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [Id=" + Id + ", UserName=" + UserName + ", Password=" + Password + ", Role=" + Role + "]";
+		return "Admin [AdminID=" + AdminID + ", UserName=" + UserName + ", Password=" + Password + ", Role=" + Role
+				+ "]";
 	}
 	
 }

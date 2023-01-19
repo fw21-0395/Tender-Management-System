@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Tender {
 
-	private int Id;
+	private int TenderID;
 	private String Titile;
 	private String Description;
 	private Date Deadline;
@@ -14,21 +14,21 @@ public class Tender {
 		
 	}
 
-	public Tender(int id, String titile, String description, Date deadline, String status) {
+	public Tender(int tenderID, String titile, String description, Date deadline, String status) {
 		super();
-		Id = id;
+		TenderID = tenderID;
 		Titile = titile;
 		Description = description;
 		Deadline = deadline;
 		Status = status;
 	}
 
-	public int getId() {
-		return Id;
+	public int getTenderID() {
+		return TenderID;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setTenderID(int tenderID) {
+		TenderID = tenderID;
 	}
 
 	public String getTitile() {
@@ -65,8 +65,8 @@ public class Tender {
 
 	@Override
 	public String toString() {
-		return "Tendor [Id=" + Id + ", Titile=" + Titile + ", Description=" + Description + ", Deadline=" + Deadline
-				+ ", Status=" + Status + "]";
+		return "Tender [TenderID=" + TenderID + ", Titile=" + Titile + ", Description=" + Description + ", Deadline="
+				+ Deadline + ", Status=" + Status + "]";
 	}
 	
 }

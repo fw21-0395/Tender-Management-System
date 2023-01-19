@@ -2,59 +2,59 @@ package com.masai.Models;
 
 public class Vendor {
 
-	private int Id;
-	private String Name;
-	private String ContactInfo;
-	private String SelectionStatus;
+	private int VendorID;
+	private String Username;
+	private String Password;
+	private String VenderName;
 	
 	public Vendor() {
 		
 	}
 
-	public Vendor(int id, String name, String contactInfo, String selectionStatus) {
+	public Vendor(int vendorID, String username, String password, String venderName) {
 		super();
-		Id = id;
-		Name = name;
-		ContactInfo = contactInfo;
-		SelectionStatus = selectionStatus;
+		VendorID = vendorID;
+		Username = username;
+		Password = password;
+		VenderName = venderName;
 	}
 
-	public int getId() {
-		return Id;
+	public int getVendorID() {
+		return VendorID;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setVendorID(int vendorID) {
+		VendorID = vendorID;
 	}
 
-	public String getName() {
-		return Name;
+	public String getUsername() {
+		return Username;
 	}
 
-	public void setName(String name) {
-		Name = name;
+	public void setUsername(String username) {
+		Username = username;
 	}
 
-	public String getContactInfo() {
-		return ContactInfo;
+	public String getPassword() {
+		return Password;
 	}
 
-	public void setContactInfo(String contactInfo) {
-		ContactInfo = contactInfo;
+	public void setPassword(String password) {
+		Password = password;
 	}
 
-	public String getSelectionStatus() {
-		return SelectionStatus;
+	public String getVenderName() {
+		return VenderName;
 	}
 
-	public void setSelectionStatus(String selectionStatus) {
-		SelectionStatus = selectionStatus;
+	public void setVenderName(String venderName) {
+		VenderName = venderName;
 	}
 
 	@Override
 	public String toString() {
-		return "Vendor [Id=" + Id + ", Name=" + Name + ", ContactInfo=" + ContactInfo + ", SelectionStatus="
-				+ SelectionStatus + "]";
+		return "Vendor [VendorID=" + VendorID + ", Username=" + Username + ", Password=" + Password + ", VenderName="
+				+ VenderName + "]";
 	}
 	
 }
