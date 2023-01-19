@@ -2,9 +2,9 @@ package com.masai.Models;
 
 public class Bid {
 
-	private int Id;
-	private int VendorId;
-	private int TenderId;
+	private int BidID;
+	private int VendorID;
+	private int TenderID;
 	private int BidAmount;
 	private String Status;
 	
@@ -12,37 +12,37 @@ public class Bid {
 		
 	}
 
-	public Bid(int id, int vendorId, int tenderId, int bidAmount, String status) {
+	public Bid(int bidID, int vendorID, int tenderID, int bidAmount, String status) {
 		super();
-		Id = id;
-		VendorId = vendorId;
-		TenderId = tenderId;
+		BidID = bidID;
+		VendorID = vendorID;
+		TenderID = tenderID;
 		BidAmount = bidAmount;
 		Status = status;
 	}
 
-	public int getId() {
-		return Id;
+	public int getBidID() {
+		return BidID;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setBidID(int bidID) {
+		BidID = bidID;
 	}
 
-	public int getVendorId() {
-		return VendorId;
+	public int getVendorID() {
+		return VendorID;
 	}
 
-	public void setVendorId(int vendorId) {
-		VendorId = vendorId;
+	public void setVendorID(int vendorID) {
+		VendorID = vendorID;
 	}
 
-	public int getTenderId() {
-		return TenderId;
+	public int getTenderID() {
+		return TenderID;
 	}
 
-	public void setTenderId(int tenderId) {
-		TenderId = tenderId;
+	public void setTenderID(int tenderID) {
+		TenderID = tenderID;
 	}
 
 	public int getBidAmount() {
@@ -63,7 +63,8 @@ public class Bid {
 
 	@Override
 	public String toString() {
-		return "Bid [Id=" + Id + ", VendorId=" + VendorId + ", TenderId=" + TenderId + ", BidAmount=" + BidAmount
+		return "Bid [BidID=" + BidID + ", VendorID=" + VendorID + ", TenderID=" + TenderID + ", BidAmount=" + BidAmount
 				+ ", Status=" + Status + "]";
 	}
+	
 }
