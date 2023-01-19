@@ -6,13 +6,13 @@ public class Bid {
 	private int VendorID;
 	private int TenderID;
 	private int BidAmount;
-	private String Status;
+	private int Status;
 	
 	public Bid() {
 		
 	}
 
-	public Bid(int bidID, int vendorID, int tenderID, int bidAmount, String status) {
+	public Bid(int bidID, int vendorID, int tenderID, int bidAmount, int status) {
 		super();
 		BidID = bidID;
 		VendorID = vendorID;
@@ -53,11 +53,11 @@ public class Bid {
 		BidAmount = bidAmount;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return Status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		Status = status;
 	}
 

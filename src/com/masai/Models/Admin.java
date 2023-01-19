@@ -3,20 +3,20 @@ package com.masai.Models;
 public class Admin {
 
 	private int AdminID;
+	private String AdminName;
 	private String UserName;
 	private String Password;
-	private String Role;
 	
 	public Admin() {
 		
 	}
 
-	public Admin(int adminID, String userName, String password, String role) {
+	public Admin(int adminID, String adminName, String userName, String password) {
 		super();
 		AdminID = adminID;
+		AdminName = adminName;
 		UserName = userName;
 		Password = password;
-		Role = role;
 	}
 
 	public int getAdminID() {
@@ -25,6 +25,14 @@ public class Admin {
 
 	public void setAdminID(int adminID) {
 		AdminID = adminID;
+	}
+
+	public String getAdminName() {
+		return AdminName;
+	}
+
+	public void setAdminName(String adminName) {
+		AdminName = adminName;
 	}
 
 	public String getUserName() {
@@ -43,18 +51,10 @@ public class Admin {
 		Password = password;
 	}
 
-	public String getRole() {
-		return Role;
-	}
-
-	public void setRole(String role) {
-		Role = role;
-	}
-
 	@Override
 	public String toString() {
-		return "Admin [AdminID=" + AdminID + ", UserName=" + UserName + ", Password=" + Password + ", Role=" + Role
-				+ "]";
+		return "Admin [AdminID=" + AdminID + ", AdminName=" + AdminName + ", UserName=" + UserName + ", Password="
+				+ Password + "]";
 	}
-	
+
 }

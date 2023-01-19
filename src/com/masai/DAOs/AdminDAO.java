@@ -3,6 +3,7 @@ package com.masai.DAOs;
 import java.util.List;
 
 import com.masai.Exceptions.AdminException;
+import com.masai.Exceptions.BidException;
 import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
 import com.masai.Models.Bid;
@@ -13,15 +14,15 @@ public interface AdminDAO {
 
 	public String AdminLogin( String username, String Password ) throws AdminException;
 	
-	public String RegisterNewVendor( Vendor vendor ) throws VendorException;
+	public String RegisterNewVendor( Vendor vendor );
 	
 	public List<Vendor> GetAllVendors ( ) throws VendorException;
 	
-	public String AddTender( Tender tender ) throws TenderException;
+	public String AddTender( Tender tender );
 	
 	public List<Tender> GetAllTenders() throws TenderException;
 	
-	public List<Bid> GetAllBidsByTender( int TenderID );
+	public List<Bid> GetAllBidsByTender( int TenderID ) throws BidException;
 	
-	public String AssignTenderToVendor( int TenderID, int VendorID );
+	public String AssignTenderToVendor( int TenderID, int VendorID ) throws TenderException, VendorException;
 }

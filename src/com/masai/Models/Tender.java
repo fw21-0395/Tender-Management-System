@@ -1,22 +1,25 @@
 package com.masai.Models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Tender {
 
 	private int TenderID;
+	private Integer Vendor_ID;
 	private String Titile;
 	private String Description;
-	private Date Deadline;
-	private String Status;
+	private LocalDate Deadline;
+	private int Status;
 	
 	public Tender() {
 		
 	}
 
-	public Tender(int tenderID, String titile, String description, Date deadline, String status) {
+	public Tender(int tenderID, Integer vendor_ID, String titile, String description, LocalDate deadline, int status) {
 		super();
 		TenderID = tenderID;
+		Vendor_ID = vendor_ID;
 		Titile = titile;
 		Description = description;
 		Deadline = deadline;
@@ -29,6 +32,14 @@ public class Tender {
 
 	public void setTenderID(int tenderID) {
 		TenderID = tenderID;
+	}
+
+	public Integer getVendor_ID() {
+		return Vendor_ID;
+	}
+
+	public void setVendor_ID(Integer vendor_ID) {
+		Vendor_ID = vendor_ID;
 	}
 
 	public String getTitile() {
@@ -47,26 +58,26 @@ public class Tender {
 		Description = description;
 	}
 
-	public Date getDeadline() {
+	public LocalDate getDeadline() {
 		return Deadline;
 	}
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(LocalDate deadline) {
 		Deadline = deadline;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return Status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		Status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "Tender [TenderID=" + TenderID + ", Titile=" + Titile + ", Description=" + Description + ", Deadline="
-				+ Deadline + ", Status=" + Status + "]";
+		return "Tender [TenderID=" + TenderID + ", Vendor_ID=" + Vendor_ID + ", Titile=" + Titile + ", Description="
+				+ Description + ", Deadline=" + Deadline + ", Status=" + Status + "]";
 	}
 	
 }
