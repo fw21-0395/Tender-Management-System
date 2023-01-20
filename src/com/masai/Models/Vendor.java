@@ -1,12 +1,15 @@
 package com.masai.Models;
 
+//Vendor Bean Class
 public class Vendor {
 
+	//Vendor Attributes:
 	private int VendorID;
 	private String Username;
 	private String Password;
 	private String VenderName;
 	
+	//Constructor:
 	public Vendor() {
 		
 	}
@@ -19,6 +22,7 @@ public class Vendor {
 		VenderName = venderName;
 	}
 
+	//Getter and Setter Method:
 	public int getVendorID() {
 		return VendorID;
 	}
@@ -51,6 +55,7 @@ public class Vendor {
 		VenderName = venderName;
 	}
 
+	//To String Method:
 	@Override
 	public String toString() {
 		return "Vendor [VendorID=" + VendorID + ", Username=" + Username + ", Password=" + Password + ", VenderName="

@@ -1,10 +1,11 @@
 package com.masai.Models;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
+//Tender Bean Class:
 public class Tender {
 
+	//Tender Attributes:
 	private int TenderID;
 	private Integer Vendor_ID;
 	private String Titile;
@@ -12,6 +13,7 @@ public class Tender {
 	private LocalDate Deadline;
 	private int Status;
 	
+	//Constructors:
 	public Tender() {
 		
 	}
@@ -26,6 +28,7 @@ public class Tender {
 		Status = status;
 	}
 
+	//Getter and Setter Methods:
 	public int getTenderID() {
 		return TenderID;
 	}
@@ -74,6 +77,7 @@ public class Tender {
 		Status = status;
 	}
 
+	//To String Method:
 	@Override
 	public String toString() {
 		return "Tender [TenderID=" + TenderID + ", Vendor_ID=" + Vendor_ID + ", Titile=" + Titile + ", Description="

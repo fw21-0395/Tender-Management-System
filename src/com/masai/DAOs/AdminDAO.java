@@ -12,8 +12,10 @@ import com.masai.Models.Bid;
 import com.masai.Models.Tender;
 import com.masai.Models.Vendor;
 
+//Admin DAO Interface:
 public interface AdminDAO {
 
+	//Abstract Methods:
 	public Admin AdminLogin( String username, String Password ) throws AdminException;
 	
 	public String RegisterNewVendor( Vendor vendor ) ;
