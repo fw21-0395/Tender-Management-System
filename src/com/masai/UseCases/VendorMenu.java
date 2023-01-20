@@ -9,6 +9,7 @@ import com.masai.DAOs.VendorDAO;
 import com.masai.DAOs.VendorDAOImpl;
 import com.masai.Exceptions.BidException;
 import com.masai.Exceptions.TenderException;
+import com.masai.Exceptions.UsernameAndPasswordException;
 import com.masai.Exceptions.VendorException;
 import com.masai.Models.Bid;
 import com.masai.Models.Tender;
@@ -16,12 +17,12 @@ import com.masai.Models.Vendor;
 
 public class VendorMenu {
 
-	public int Login() {
+	public int Login() throws UsernameAndPasswordException {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter Vendor Credentials( Username and Password )");
-		System.out.println("-----------------------------------------------");
+		System.out.println("\nEnter Vendor Credentials( Username and Password )");
+		System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 		
 		System.out.println("Enter username : ");
 		String username = sc.next();
@@ -35,14 +36,21 @@ public class VendorMenu {
 		
 		try {
 			
+			if( username.length() < 6 || password.length() < 6 ) {
+				
+				throw new UsernameAndPasswordException("\n Invalid Username or Password \n ( Username and password length should be minimum 6 characters ) \n Please try again... ");
+			}
+			
 			Vendor vendor = venderDao.VendorLogin(username, password);
 			
-			System.out.println( "Welcome "+vendor.getVenderName() );
+			System.out.println( "\nWelcome "+vendor.getVenderName() );
 			loginID = vendor.getVendorID();
 			  
 		} catch (VendorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		return loginID;
@@ -55,6 +63,8 @@ public class VendorMenu {
 		try {
 			
 			List<Tender> tenders = venderDao.GetAllCurrentTenders();
+			
+			System.out.println("\nActive Tendors List:");
 			
 			tenders.forEach( tender -> {
 				
@@ -98,7 +108,7 @@ public class VendorMenu {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter Bid Details( VendorID, TenderID, Bid Amount )");
+		System.out.println("\nEnter Bid Details( TenderID, Bid Amount )");
 		System.out.println("-----------------------------------------------");
 		
 		System.out.println("Enter Tender ID : ");
@@ -152,13 +162,12 @@ public class VendorMenu {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter Vendor ID to check your all Bids");
-		System.out.println("-----------------------------------------------");
-		
 		VendorDAO venderDao = new VendorDAOImpl();
 		
 		try {
 			List<Bid> bids = venderDao.GetAllBidsByVendor(vendorID);
+			
+			System.out.println("\nYour Bid History:");
 			
 			bids.forEach( bid -> {
 				
