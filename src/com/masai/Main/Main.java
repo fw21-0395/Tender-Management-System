@@ -65,7 +65,7 @@ public class Main {
 				break;
 			}
 			default:
-				System.out.println("Invalid Option , Please try again !!!");
+				System.out.println("Invalid Option, Please try again !!!");
 				Menu();
 			}
 					
@@ -143,7 +143,7 @@ public class Main {
 				break;
 			}
 			default:
-				System.out.println("Invalid Option , Please try again !!!");
+				System.out.println("Invalid Option, Please try again !!!");
 				AdminActivity( adminID );
 			}
 			
@@ -208,7 +208,7 @@ public class Main {
 				break;
 			}
 			default:
-				System.out.println("Invalid Option , Please try again !!!");
+				System.out.println("Invalid Option, Please try again !!!");
 				VendorActivity(venderID);
 			}
 			

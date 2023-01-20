@@ -1,0 +1,68 @@
+
+Tender Management System:
+
+1. Admin table:
+AdminID (primary key)
+AdminName
+Username
+Password
+
+
+2.Vendors table:
+VendorID (primary key)
+VendorName
+Username
+Password
+
+
+3.Tenders table:
+TenderID (primary key)
+Title
+Description
+Deadline 
+Status (open or closed)
+
+4.Bids table:
+BidID (primary key)
+Vendor_id (foreign key referencing vendors table)
+Tender_id (foreign key referencing tenders table)
+Bid_amount
+Status (submitted, selected or rejected)
+
+Create table Admin 
+(
+AdminID int primary key auto_increment,
+AdminName varchar(16) not null,
+Username varchar(12) not null unique,
+Password varchar(8) not null
+);
+
+Create table Vendors
+(
+VendorID int primary key auto_increment,
+VendorName varchar(16) not null unique,
+Username varchar(12) not null unique,
+Password varchar(8) not null
+);
+
+Create table Tenders
+(
+TenderID int primary key auto_increment,
+Vendor_ID int,
+Title varchar(16) not null unique,
+Description varchar(50) not null,
+Deadline date,
+Status int not null,
+foreign key(Vendor_ID) references Vendors(VendorID) ON DELETE CASCADE
+);
+
+Create table Bids
+(
+BidID int primary key auto_increment,
+Vendor_ID int,
+Tender_ID int,
+BidAmount int not null,
+Status int not null,
+Foreign key (Vendor_ID) references Vendors (VendorID) ON DELETE CASCADE,
+Foreign key (Tender_ID) references Tenders (TenderID) ON DELETE CASCADE
+);

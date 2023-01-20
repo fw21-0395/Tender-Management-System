@@ -17,31 +17,45 @@ import com.masai.Models.Tender;
 import com.masai.Models.Vendor;
 import com.masai.Utility.DBUtil;
 
+//Admin DAO Interface Implementation Class:
 public class AdminDAOImpl implements AdminDAO {
 
+	//Admin Login Implementation:It will take Username and Password and
+	//will Match details in Admins Table present in Database and 
+	//return Admin object
 	@Override
 	public Admin AdminLogin(String username, String Password) throws AdminException {
 		
+		//Response:
 		Admin admin = null;
 		
+			//Connection:
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
+				//Prepared Statement: To check Username and Password are Correct or not through MySQL Command
 			 	PreparedStatement ps = conn.prepareStatement(" SELECT * FROM Admin WHERE username=? AND password = ? ");
-			 	ps.setString(1, username);
-			 	ps.setString(2, Password);
 			 	
+			 	//Binding Values to Statement
+			 	ps.setString(1, username); //1 Refer to 1st ? ( Syntax for placeholder )
+			 	ps.setString(2, Password); //2 Refer to 2nd ? ( Syntax for placeholder )
+			 	
+			 	//ResultSet: executeQuery will return ResultSet
 			 	ResultSet rs = ps.executeQuery();
 			 	
+			 	//If Condition because ResultSet will return 1 Set Only:
 			 	if( rs.next() ) {
 			 		
+			 		//Admin Object for Response:
 			 		admin = new Admin(); 
 			 		
+			 		//Binding values to Admin Object
 			 		admin.setAdminID( rs.getInt( "AdminID" ) );
 			 		admin.setAdminName( rs.getString( "AdminName" ) );
 			 		admin.setUserName( rs.getString( "Username" ) );
 			 		admin.setPassword( "Password" );
 			 	}else {
 			 		
+			 		//If details not matched with database details:
 			 		throw new AdminException( "Wrong Admin Credentials, Please try again" );
 			 	}
 				
@@ -52,25 +66,35 @@ public class AdminDAOImpl implements AdminDAO {
 				throw new AdminException( e.getMessage() );
 			}
 		
+		//Returned Admin Object as Response	
 		return admin;
 	}
 
+	//Register New Vendor Implementation:It will take Vendor Object to Register new Vendor and
+	//it will insert Vendor Object Details in the Vendors Table and
+	//it will return String as Response
 	@Override
 	public String RegisterNewVendor(Vendor vendor) {
 		
+		//Response:
 		String Response = "Vendor "+vendor.getVenderName()+" Not Regesterd Successffuly !!!";
 		
+			//Connection:
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
+				//Prepared Statement: To Insert Vendor Details in Vendor Table using MySQL Commands
 				PreparedStatement ps = conn.prepareStatement(" INSERT INTO Vendors( VendorName, Username, Password ) VALUES(?, ?, ?) ");
 				ps.setString(1, vendor.getVenderName());
 				ps.setString(2, vendor.getUsername());
 				ps.setString(3, vendor.getPassword());
 				
+				//Res: executeUpdate will return int value based on how many rows are affected in Table
 				int res = ps.executeUpdate();
 				
+				//If result value > 0 then MySQL Command is executed successfully
 				if(res > 0) {
 					
+					//Message for response
 					Response = "Vendor "+vendor.getVenderName()+" Regesterd Successffuly !!!";
 				}
 				
@@ -79,35 +103,51 @@ public class AdminDAOImpl implements AdminDAO {
 				e.printStackTrace();
 			}
 		
+		//Returned Response Message
 		return Response;
 	}
 
+	//Get All Vendors List Implementation:It will Collect all Vendors Data from Vendors Table and 
+	//it will return List of Vendor Objects as Response
 	@Override
 	public List<Vendor> GetAllVendors() throws VendorException {
 		
+		//List of Vendor Objects as Response:
 		List<Vendor> vendors = new ArrayList();
 		
+			//Connection:
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
+				//Prepared Statement: To get all Rows from Vendors Table using MySQL
 				PreparedStatement ps = conn.prepareStatement("SELECT * FROM VENDORS");
 				
+				//ResultSet: executeQuery will return ResultSet
 				ResultSet rs = ps.executeQuery();
 				
+				//Flag to check if 
 				boolean flag = false;
 				
+				//While Loop because here ResultSet will have more than 1 set
 				while( rs.next() ) {
 					
+					//changed flag to true so no need to throw Exception
+					flag = true;
+					
+					//Vendor Object
 					Vendor vendor = new Vendor();
 					
+					//Binding Values from ResultSet to Vendor Object
 					vendor.setVendorID( rs.getInt("VendorID") );
 					vendor.setVenderName( rs.getString("VendorName") );
 					vendor.setUsername( rs.getString("Username") );
 					vendor.setPassword( rs.getString("Password") );
 					
+					//Added Vendor Object to List
 					vendors.add(vendor);
 				}
 				
-				if (flag = false) {
+				//If Flag is false then throw Vendor Exception
+				if (flag == false) {
 					
 					throw new VendorException( "No Vendor Found in the Database" );
 				}
@@ -120,6 +160,7 @@ public class AdminDAOImpl implements AdminDAO {
 				throw new VendorException( e.getMessage() );
 			}
 		
+		//Returning Vendors List as Response
 		return vendors;
 	}
 

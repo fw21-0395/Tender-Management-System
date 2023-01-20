@@ -189,7 +189,7 @@ public class AdminMenu {
 				String result = "Open";
 				if(res == 1) {
 					
-					result = "Close";
+					result = "Closed";
 				}
 				
 				System.out.println(" Tender Status :"+result);

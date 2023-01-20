@@ -1,13 +1,16 @@
 package com.masai.Models;
 
+//Bid Bean Class
 public class Bid {
 
+	//Bid Attributes:
 	private int BidID;
 	private int VendorID;
 	private int TenderID;
 	private int BidAmount;
 	private int Status;
 	
+	//Constructors:
 	public Bid() {
 		
 	}
@@ -21,6 +24,7 @@ public class Bid {
 		Status = status;
 	}
 
+	//Getter and Setter Methods:
 	public int getBidID() {
 		return BidID;
 	}
@@ -61,6 +65,7 @@ public class Bid {
 		Status = status;
 	}
 
+	//To String Method:
 	@Override
 	public String toString() {
 		return "Bid [BidID=" + BidID + ", VendorID=" + VendorID + ", TenderID=" + TenderID + ", BidAmount=" + BidAmount

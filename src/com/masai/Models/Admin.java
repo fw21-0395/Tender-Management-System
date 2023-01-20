@@ -1,16 +1,20 @@
 package com.masai.Models;
 
+//Admin Bean Class:
 public class Admin {
 
+	//Admin Attributes:
 	private int AdminID;
 	private String AdminName;
 	private String UserName;
 	private String Password;
 	
+	//Empty Constructor:
 	public Admin() {
 		
 	}
 
+	//Constructor:
 	public Admin(int adminID, String adminName, String userName, String password) {
 		super();
 		AdminID = adminID;
@@ -19,6 +23,7 @@ public class Admin {
 		Password = password;
 	}
 
+	//Getter and Setter Methods:
 	public int getAdminID() {
 		return AdminID;
 	}
@@ -51,6 +56,7 @@ public class Admin {
 		Password = password;
 	}
 
+	//To String Method:
 	@Override
 	public String toString() {
 		return "Admin [AdminID=" + AdminID + ", AdminName=" + AdminName + ", UserName=" + UserName + ", Password="
