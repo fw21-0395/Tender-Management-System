@@ -24,5 +24,5 @@ public interface AdminDAO {
 	
 	public List<Bid> GetAllBidsByTender( int TenderID ) throws BidException;
 	
-	public String AssignTenderToVendor( int TenderID, int VendorID ) throws TenderException, VendorException;
+	public String AssignTenderToVendor( int TenderID, int VendorID ) throws TenderException, VendorException,BidException;
 }

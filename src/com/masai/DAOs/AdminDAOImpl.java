@@ -35,7 +35,6 @@ public class AdminDAOImpl implements AdminDAO {
 			 	if( rs.next() ) {
 			 		
 			 		Response = "Welcome "+ rs.getString("AdminName") +" !"; 
-			 		
 			 	}
 				
 			} catch (SQLException e) {
@@ -214,7 +213,6 @@ public class AdminDAOImpl implements AdminDAO {
 				bid.setStatus( rs.getInt( "Status" ) );
 				
 				bids.add(bid);
-				
 			}
 			
 			if( flag == false ) {
@@ -233,46 +231,92 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public String AssignTenderToVendor(int TenderID, int VendorID) throws TenderException, VendorException {
+	public String AssignTenderToVendor(int TenderID, int VendorID) throws TenderException, VendorException,BidException {
 		
 		String Response = "Tender with ID "+TenderID+" Not Assigned to Vendor with ID "+VendorID;
 		
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
-				PreparedStatement ps = conn.prepareStatement(" SELECT * FROM Vendors WHERE VendorID = ? ");
-				ps.setInt( 1,VendorID );
+				//To Check Status of Tender Already assigned or not
+				PreparedStatement ps0 = conn.prepareStatement(" SELECT * FROM Tenders WHERE TenderID = ? ");
+				ps0.setInt(1, TenderID);
 				
-				ResultSet rs = ps.executeQuery();
+				ResultSet rs0 = ps0.executeQuery();
 				
-				if( rs.next() ) {
+				if( rs0.next() ) {
 					
-					PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Tenders WHERE TenderID = ? ");
-					ps2.setInt( 1,TenderID );
-					
-					ResultSet rs2 = ps2.executeQuery();
-					
-					if( rs.next() ) {
+					if( rs0.getInt( "Status" ) == 1 ) {
 						
-						PreparedStatement ps3 = conn.prepareStatement(" UPDATE Tenders SET Vendor_ID = ? ");
-						ps3.setInt(1, VendorID);
-						
-						int res = ps3.executeUpdate();
-						
-						if( res > 0 ) {
-							Response = "Tender with ID "+TenderID+" Assigned to Vendor with ID "+VendorID;
-						}
-						
+						throw new TenderException( "This Tender is already assigned !!!" );
 					}else {
+						//To Check VendorID is Correct or Not
+						PreparedStatement ps1 = conn.prepareStatement(" SELECT * FROM Vendors WHERE VendorID = ? ");
+						ps1.setInt( 1,VendorID );
 						
-						throw new TenderException( "No Tender found with ID "+TenderID );
+						ResultSet rs1 = ps1.executeQuery();
+						
+						if( rs1.next() ) {
+							
+							//To check TenderID is Correct or Not
+							PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Tenders WHERE TenderID = ? ");
+							ps2.setInt( 1,TenderID );
+							
+							ResultSet rs2 = ps2.executeQuery();
+							
+							if( rs2.next() ) {
+								
+								//To Check if Vendor has placed bid or not in this tender
+								PreparedStatement ps3 = conn.prepareStatement("SELECT * FROM Bids WHERE Vendor_ID = ? AND Tender_ID = ? ");
+								ps3.setInt(1, VendorID);
+								ps3.setInt(2, TenderID);
+								
+								ResultSet rs3 = ps3.executeQuery();
+								
+								if( rs3.next() ) {
+									
+									int BidID = rs3.getInt("BidID");
+									int BidAmount = rs3.getInt("BidAmount");
+									
+									//To Update in Bids Table
+									PreparedStatement ps4 = conn.prepareStatement("UPDATE Bids SET Status = ? WHERE BidID = ?");
+									ps4.setInt(1, 1);
+									ps4.setInt(2, BidID);
+									
+									int res4 = ps4.executeUpdate();
+									
+									if( res4 > 0 ) {
+											
+										//To Update in Tenders Table
+										PreparedStatement ps5 = conn.prepareStatement(" UPDATE Tenders SET Vendor_ID = ?, Status = ? WHERE TenderID = ? ");
+										ps5.setInt(1, VendorID);
+										ps5.setInt(2, 1);
+										ps5.setInt(3, TenderID);
+										
+										int res5 = ps5.executeUpdate();
+										
+										if( res5 > 0 ) {
+											
+											Response = "TenderID "+TenderID+" is Assigned to VendorID "+VendorID +" with BidID "+BidID +" and BidAmount "+BidAmount;
+										}
+									}
+									
+								}else {
+									
+									throw new BidException("No Bid found in the record with VendorID "+VendorID);
+								}
+								
+								
+							}else {
+								
+								throw new TenderException( "No Tender found with ID "+TenderID );
+							}
+							
+						}else {
+							
+							throw new VendorException( "No Vendor found with ID "+VendorID );
+						}
 					}
-					
-					
-				}else {
-					
-					throw new VendorException( "No Vendor found with ID "+VendorID );
 				}
-				
 				
 			} catch (SQLException e) {
 				// TODO: handle exception
@@ -283,5 +327,4 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		return Response;
 	}
-
 }

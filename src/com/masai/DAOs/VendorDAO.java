@@ -13,11 +13,11 @@ public interface VendorDAO {
 	
 	public String VendorLogin( String username, String password ) throws VendorException;
 	
-	public List<Tender> GetAllTenders() throws TenderException;
+	public List<Tender> GetAllCurrentTenders() throws TenderException;
 	
-	public String PlaceBidOnTender( int BidID, int TenderID  ) throws BidException;
+	public String PlaceBidOnTender( Bid bid,int VendorID, int TenderID  ) throws TenderException,VendorException;
 	
 	public String CheckStatusOfBid( int BidID ) throws BidException; 
 	
-	public List<Bid> GetAllBidsByVendor( int VendorID ) throws BidException; 
+	public List<Bid> GetAllBidsByVendor( int VendorID ) throws BidException,VendorException; 
 }
