@@ -12,10 +12,11 @@ import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
 import com.masai.Models.Bid;
 import com.masai.Models.Tender;
+import com.masai.Models.Vendor;
 
 public class VendorMenu {
 
-	public void Login() {
+	public int Login() {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -28,16 +29,23 @@ public class VendorMenu {
 		System.out.println("Enter Password : ");
 		String password = sc.next();
 		
+		int loginID = 0;
+		
 		VendorDAO venderDao = new VendorDAOImpl();
 		
 		try {
 			
-			  System.out.println(venderDao.VendorLogin(username, password));
+			Vendor vendor = venderDao.VendorLogin(username, password);
+			
+			System.out.println( "Welcome "+vendor.getVenderName() );
+			loginID = vendor.getVendorID();
 			  
 		} catch (VendorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return loginID;
 	}
 	
 	public void GetAllCurrentTenders() {
@@ -52,12 +60,12 @@ public class VendorMenu {
 				
 				System.out.println(" Tender ID :"+tender.getTenderID());
 				
-				if( tender.getVendor_ID() == 0 ) {
-					
-					System.out.println(" Vendor ID : Not assigned yet");
-				}else {
-					System.out.println(" Vendor ID :"+tender.getVendor_ID());
-				}
+//				if( tender.getVendor_ID() == 0 ) {
+//					
+//					System.out.println(" Vendor ID : Not assigned yet");
+//				}else {
+//					System.out.println(" Vendor ID :"+tender.getVendor_ID());
+//				}
 				
 				System.out.println(" Tender Title :"+tender.getTitile());
 				System.out.println(" Tender Description :"+tender.getDescription());
@@ -67,10 +75,10 @@ public class VendorMenu {
 				String result;
 				if(res == 0) {
 					
-					result = "Not Completed";
+					result = "Open";
 				}else {
 					
-					result = "Completed";
+					result = "Closed";
 				}
 				
 				System.out.println(" Tender Status :"+result);
@@ -86,15 +94,12 @@ public class VendorMenu {
 		
 	}
 	
-	public void PlaceBid() {
+	public void PlaceBid( int vendorID ) {
 		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter Bid Details( VendorID, TenderID, Bid Amount )");
 		System.out.println("-----------------------------------------------");
-		
-		System.out.println("Enter Your Vendor ID : ");
-		int vendorID = sc.nextInt();
 		
 		System.out.println("Enter Tender ID : ");
 		int tenderID = sc.nextInt();
@@ -123,7 +128,7 @@ public class VendorMenu {
 		}
 	}
 	
-	public void GetBidStatusByBidID() {
+	public void GetBidStatusByBidID( int VendorID ) {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -136,22 +141,19 @@ public class VendorMenu {
 		VendorDAO venderDao = new VendorDAOImpl();
 		
 		 try {
-			System.out.println( venderDao.CheckStatusOfBid(bidID) );
+			System.out.println( venderDao.CheckStatusOfBid( bidID,VendorID ) );
 		} catch (BidException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void GetAllBidsByVenderID() {
+	public void GetAllBidsByVenderID( int vendorID ) {
 		
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Enter Vendor ID to check your all Bids");
 		System.out.println("-----------------------------------------------");
-		
-		System.out.println("Enter Your Vendor ID : ");
-		int vendorID = sc.nextInt();
 		
 		VendorDAO venderDao = new VendorDAOImpl();
 		

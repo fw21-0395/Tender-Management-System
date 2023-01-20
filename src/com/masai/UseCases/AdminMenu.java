@@ -10,13 +10,14 @@ import com.masai.Exceptions.AdminException;
 import com.masai.Exceptions.BidException;
 import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
+import com.masai.Models.Admin;
 import com.masai.Models.Bid;
 import com.masai.Models.Tender;
 import com.masai.Models.Vendor;
 
 public class AdminMenu {
 
-	public void Login () {
+	public int Login () {
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -31,13 +32,22 @@ public class AdminMenu {
 		
 		AdminDAO adminDao = new AdminDAOImpl();
 		
+		int login = 0;
+		
 		try {
 			
-			System.out.println(adminDao.AdminLogin(username, password)); 
+			Admin admin = adminDao.AdminLogin(username, password);
+			
+			System.out.println("Welcome "+admin.getAdminName());
+			
+			login = admin.getAdminID();
+			
 		} catch (AdminException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return login;
 	}
 	
 	public void RegisterNewVendor() {

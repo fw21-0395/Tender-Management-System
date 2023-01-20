@@ -12,14 +12,15 @@ import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
 import com.masai.Models.Bid;
 import com.masai.Models.Tender;
+import com.masai.Models.Vendor;
 import com.masai.Utility.DBUtil;
 
 public class VendorDAOImpl implements VendorDAO {
 
 	@Override
-	public String VendorLogin(String username, String password) throws VendorException {
+	public Vendor VendorLogin(String username, String password) throws VendorException {
 		
-		String Response = "Wrong Vendor Credeintials !!!";
+		Vendor vendor = null;
 		
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
@@ -31,11 +32,16 @@ public class VendorDAOImpl implements VendorDAO {
 				
 				if( rs.next() ) {
 					
-					Response = "Welcome "+ rs.getString("VendorName") +"...";
+					vendor = new Vendor();
+					
+					vendor.setVendorID( rs.getInt( "VendorID" ) );
+					vendor.setVenderName( rs.getString( "VendorName" ) );
+					vendor.setUsername( rs.getString( "Username" ) );
+					vendor.setPassword( rs.getString( "Password" ) );
 					
 				}else {
 					
-					throw new VendorException("Wrong Vendor Credentials !!!");
+					throw new VendorException("Wrong Vendor Credentials, Please Try Again !!!");
 				}
 				
 			} catch (SQLException e) {
@@ -45,7 +51,7 @@ public class VendorDAOImpl implements VendorDAO {
 				throw new VendorException( e.getMessage() );
 			}
 		
-		return Response;
+		return vendor;
 	}
 
 	@Override
@@ -118,8 +124,9 @@ public class VendorDAOImpl implements VendorDAO {
 					
 					if( rs.next() ) {
 						
-						PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Tenders WHERE TenderID = ?");
+						PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Tenders WHERE TenderID = ? AND Status = ?");
 						ps2.setInt(1, TenderID);
+						ps2.setInt(2, 0);
 						
 						ResultSet rs2 = ps2.executeQuery();
 						
@@ -159,14 +166,15 @@ public class VendorDAOImpl implements VendorDAO {
 	}
 
 	@Override
-	public String CheckStatusOfBid(int BidID) throws BidException {
+	public String CheckStatusOfBid(int BidID, int VendorID ) throws BidException {
 		
 		String Response = "Not Accepted";
 		
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
-				PreparedStatement ps = conn.prepareStatement("SELECT * FROM Bids WHERE BidID = ?");
+				PreparedStatement ps = conn.prepareStatement("SELECT * FROM Bids WHERE BidID = ? AND Vendor_ID = ?");
 				ps.setInt(1, BidID);
+				ps.setInt(2, VendorID);
 				
 				ResultSet rs = ps.executeQuery();
 				

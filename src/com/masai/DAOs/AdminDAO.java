@@ -6,13 +6,14 @@ import com.masai.Exceptions.AdminException;
 import com.masai.Exceptions.BidException;
 import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
+import com.masai.Models.Admin;
 import com.masai.Models.Bid;
 import com.masai.Models.Tender;
 import com.masai.Models.Vendor;
 
 public interface AdminDAO {
 
-	public String AdminLogin( String username, String Password ) throws AdminException;
+	public Admin AdminLogin( String username, String Password ) throws AdminException;
 	
 	public String RegisterNewVendor( Vendor vendor );
 	
