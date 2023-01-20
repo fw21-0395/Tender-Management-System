@@ -20,9 +20,9 @@ import com.masai.Utility.DBUtil;
 public class AdminDAOImpl implements AdminDAO {
 
 	@Override
-	public String AdminLogin(String username, String Password) throws AdminException {
+	public Admin AdminLogin(String username, String Password) throws AdminException {
 		
-		String Response = "Wrong Credentials, Please try again...";
+		Admin admin = null;
 		
 			try ( Connection conn = DBUtil.provideConnection() ) {
 				
@@ -34,7 +34,15 @@ public class AdminDAOImpl implements AdminDAO {
 			 	
 			 	if( rs.next() ) {
 			 		
-			 		Response = "Welcome "+ rs.getString("AdminName") +" !"; 
+			 		admin = new Admin(); 
+			 		
+			 		admin.setAdminID( rs.getInt( "AdminID" ) );
+			 		admin.setAdminName( rs.getString( "AdminName" ) );
+			 		admin.setUserName( rs.getString( "Username" ) );
+			 		admin.setPassword( "Password" );
+			 	}else {
+			 		
+			 		throw new AdminException( "Wrong Admin Credentials, Please try again" );
 			 	}
 				
 			} catch (SQLException e) {
@@ -44,7 +52,7 @@ public class AdminDAOImpl implements AdminDAO {
 				throw new AdminException( e.getMessage() );
 			}
 		
-		return Response;
+		return admin;
 	}
 
 	@Override
