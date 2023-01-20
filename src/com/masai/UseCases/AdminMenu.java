@@ -1,6 +1,5 @@
 package com.masai.UseCases;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -8,8 +7,10 @@ import java.util.Scanner;
 import com.masai.DAOs.AdminDAO;
 import com.masai.DAOs.AdminDAOImpl;
 import com.masai.Exceptions.AdminException;
+import com.masai.Exceptions.BidException;
 import com.masai.Exceptions.TenderException;
 import com.masai.Exceptions.VendorException;
+import com.masai.Models.Bid;
 import com.masai.Models.Tender;
 import com.masai.Models.Vendor;
 
@@ -69,6 +70,30 @@ public class AdminMenu {
 		
 	}
 	
+	public void GetAllVendors() {
+		
+		AdminDAO adminDao = new AdminDAOImpl();
+		
+		try {
+			List<Vendor> vendors = adminDao.GetAllVendors();
+			
+			vendors.forEach( vendor -> {
+				
+				System.out.println("Vendor ID:"+vendor.getVendorID());
+				System.out.println("Vendor Name:"+vendor.getVenderName());
+				System.out.println("Vendor Username:"+vendor.getUsername());
+				
+				System.out.println("-------------------------------");
+				
+			});
+			
+		} catch (VendorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void AddTender() {
 		
 		Scanner sc = new Scanner(System.in);
@@ -125,13 +150,10 @@ public class AdminMenu {
 				System.out.println(" Tender Deadline :"+tender.getDeadline());
 				
 				int res = tender.getStatus();
-				String result;
-				if(res == 0) {
+				String result = "Not Assigned Yet";
+				if(res == 1) {
 					
-					result = "Not Completed";
-				}else {
-					
-					result = "Completed";
+					result = "Assigned to Vendor with ID as "+tender.getVendor_ID();
 				}
 				
 				System.out.println(" Tender Status :"+result);
@@ -161,17 +183,61 @@ public class AdminMenu {
 		AdminDAO adminDao = new AdminDAOImpl();
 		
 		try {
-			
-			String res =  adminDao.AssignTenderToVendor(tendorID, vendorID);
-			System.out.println(res);
+			  
+			System.out.println(adminDao.AssignTenderToVendor( tendorID, vendorID ));
 		} catch (TenderException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (VendorException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (BidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	public void GetAllBidsByTenderID() {
 		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter Tender ID to check your all Bids");
+		System.out.println("-----------------------------------------------");
+		
+		System.out.println("Enter Tender ID : ");
+		int tenderID = sc.nextInt();
+		
+		AdminDAO adminDao = new AdminDAOImpl();
+		
+		try {
+			
+			List<Bid> bids = adminDao.GetAllBidsByTender(tenderID);
+			
+			bids.forEach( bid -> {
+				
+				System.out.println("Bid ID:"+bid.getBidID());
+				System.out.println("Vendor ID:"+bid.getVendorID());
+				System.out.println("Tender ID:"+bid.getTenderID());
+				System.out.println("Bid Amount:"+bid.getBidAmount());
+				
+				String status = "Not Assigned";
+				
+				if( bid.getStatus() == 1 ) {
+					
+					status = "Assigned";
+				}
+				
+				System.out.println("Bid Status:"+status);
+				
+				System.out.println("------------------------------------------");
+				
+			});
+			
+			
+		} catch (BidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -182,11 +248,13 @@ public class AdminMenu {
 		
 //		am.RegisterNewVendor();
 		
+//		am.GetAllVendors();
+		
 //		am.AddTender();
 		
 //		am.GetAllTenders();
 		
-		
+//		am.GetAllBidsByTenderID();
 		
 //		am.AssignTenderToVendor();
 		
