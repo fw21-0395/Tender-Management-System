@@ -13,7 +13,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Welcome to the Tender Management System ");
+		System.out.println("\nWelcome to the Tender Management System ");
 		System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		
 		Menu();
@@ -38,7 +38,7 @@ public class Main {
 			case 1: {
 				
 				int adminID = am.Login();
-				System.out.println("--------------------");
+				System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 				if( adminID != 0 ) {
 					System.out.println("Logged In as Admin Sucssfully...");
 					AdminActivity( adminID );
@@ -50,7 +50,7 @@ public class Main {
 			case 2: {
 				
 				int venderID = vm.Login();
-				System.out.println("--------------------");
+				System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 				if( venderID != 0 ) {
 					System.out.println("Logged In as Vendor Sucssfully...");
 					VendorActivity( venderID );
@@ -134,7 +134,7 @@ public class Main {
 			}
 			case 7:{
 				System.out.println("Logged Out Successfully !");
-				System.out.println("-------------------");
+				System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 				Menu();
 				break;
 			}
@@ -149,6 +149,8 @@ public class Main {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("Invalid Option, Please try again");
+			AdminActivity(adminID);
 		}
 		
 	}
@@ -197,7 +199,7 @@ public class Main {
 			}
 			case 5:{
 				System.out.println("Logged Out Successfully !");
-				System.out.println("-------------------");
+				System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 				Menu();
 				break;
 			}
@@ -212,6 +214,8 @@ public class Main {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("Invalid Option, Please try again");
+			VendorActivity(venderID);
 		}
 	}
 }

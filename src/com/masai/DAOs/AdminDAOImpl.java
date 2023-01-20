@@ -180,7 +180,7 @@ public class AdminDAOImpl implements AdminDAO {
 					tenders.add(tender);
 				}
 				
-				if( flag = false ) {
+				if( flag == false ) {
 					
 					throw new TenderException("No Tender Data found in the Database !!!");
 				}
