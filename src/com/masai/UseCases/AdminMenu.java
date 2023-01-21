@@ -111,13 +111,14 @@ public class AdminMenu {
 			System.out.println("\nVendors List:");
 			
 			vendors.forEach( vendor -> {
-				System.out.println("\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+				
+				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 				System.out.println("Vendor ID:"+vendor.getVendorID());
 				System.out.println("Vendor Name:"+vendor.getVenderName());
 				System.out.println("Vendor Username:"+vendor.getUsername());
 				
-				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+//				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 			});
 			
@@ -170,7 +171,7 @@ public class AdminMenu {
 			
 			tenders.forEach( tender -> {
 				
-				System.out.println("\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 				System.out.println(" Tender ID :"+tender.getTenderID());
 				
@@ -194,7 +195,7 @@ public class AdminMenu {
 				
 				System.out.println(" Tender Status :"+result);
 				
-				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+//				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 			});
 		} catch (TenderException e) {
@@ -251,7 +252,7 @@ public class AdminMenu {
 			
 			bids.forEach( bid -> {
 				
-				System.out.println("\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 				System.out.println("Bid ID:"+bid.getBidID());
 				System.out.println("Vendor ID:"+bid.getVendorID());
@@ -267,7 +268,7 @@ public class AdminMenu {
 				
 				System.out.println("Bid Status:"+status);
 				
-				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+//				System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 				
 			});
 			
@@ -280,7 +281,7 @@ public class AdminMenu {
 	
 	public static void main(String[] args) {
 		
-//		AdminMenu am = new AdminMenu();
+		AdminMenu am = new AdminMenu();
 //		
 //		try {
 //			am.Login();
