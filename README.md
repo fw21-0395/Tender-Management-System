@@ -25,3 +25,6 @@ The Role of a Vendor is:
 2. Place a Bid against a Tender.
 3. View status of a Bid(Whether Selected or Not)
 4. View his own Bid History.
+
+
+<img align="right" alt="coding" width="400" src="[https://user-images.githubusercontent.com/55389276/140866485-8fb1c876-9a8f-4d6a-98dc-08c4981eaf70.gif](https://drive.google.com/file/d/1IAWj_xExlkB668yXnTyRlwHd0DhADlyB/view?usp=sharing)">
