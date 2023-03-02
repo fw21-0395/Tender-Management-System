@@ -25,4 +25,8 @@ The Role of a Vendor is:
 3. View status of a Bid(Whether Selected or Not)
 4. View his own Bid History.
 
-https://github.com/fw21-0395/Tender-Management-System/blob/main/src/Screenshot%202023-03-02%20at%201.06.26%20PM.png
+
+
+<h2>#ER Diagram</h2>
+<br/>
+<img src="https://github.com/fw21-0395/Tender-Management-System/blob/main/src/Screenshot%202023-03-02%20at%201.06.26%20PM.png"/>
