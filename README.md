@@ -30,3 +30,6 @@ The Role of a Vendor is:
 <h2>#ER Diagram</h2>
 <br/>
 <img src="https://github.com/fw21-0395/Tender-Management-System/blob/main/src/Screenshot%202023-03-02%20at%201.06.26%20PM.png"/>
+
+<h2>Video Presentation:</h2>
+Link: https://drive.google.com/file/d/1EiuToCphrmD8xEMIQ-jggTFlGWFUco3A/view?usp=share_link
